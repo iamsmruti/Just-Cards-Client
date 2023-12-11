@@ -2,7 +2,7 @@ name: Keep Alive
 
 on:
   schedule:
-    - cron: '*/1 * * * *'  # Run every 20 minutes
+    - cron: '*/15 * * * *'  # Run every 20 minutes
 
 jobs:
   ping-server:
