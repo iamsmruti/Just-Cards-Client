@@ -1,33 +1,22 @@
-// loginService.ts
-import axios from 'axios';
+import AxiosClient from "../";
 
-interface LoginRequest {
-  loginId: string; // username or email
-  password: string;
+interface ApiResponse<T> {
+  data: T;
+  status: number;
 }
 
-interface LoginResponse {
-  token: string; // Assuming the server responds with a token upon successful login
-  user: {
-    id: string;
-    username: string;
-    email: string;
-    // ... other user data
-  };
+export interface UserData {
+  email: string;
+  username: string;
+  userId: string;
 }
 
-export const login = async (loginData: LoginRequest): Promise<LoginResponse> => {
+export const getUserData = async (): Promise<ApiResponse<UserData>> => {
   try {
-    const response = await axios.post<LoginResponse>('/api/login', loginData);
-
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      // Handle non-200 status codes if needed
-      throw new Error(`Login failed with status: ${response.status}`);
-    }
+    const response = await AxiosClient.get<UserData>("/auth/checkAuth");
+    return { data: response.data, status: response.status };
   } catch (error) {
-    // Handle network errors, server errors, etc.
-    throw new Error(`Error during login: ${(error as Error).message}`);
+    console.error("Error fetching user data:", error);
+    throw error;
   }
 };
