@@ -1,0 +1,13 @@
+name: Keep Alive
+
+on:
+  schedule:
+    - cron: '*/20 * * * *'  # Run every 20 minutes
+
+jobs:
+  ping-server:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Ping
+        run: curl -sS https://just-cards-server.onrender.com/
