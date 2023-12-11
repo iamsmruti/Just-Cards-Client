@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { LoginRequest, login as loginService, LoginResponse } from '../../services/auth/loginService';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../../stores/authStore';
 
 interface UseLoginHook {
   login: (loginData: LoginRequest) => Promise<void>;
@@ -13,6 +16,9 @@ const useLogin: () => UseLoginHook = () => {
   const [error, setError] = useState<string | null>(null);
   const [userData, setUserData] = useState<LoginResponse | null>(null);
 
+  const navigate = useNavigate()
+  const authStore = useAuthStore()
+
   const login = async (loginData: LoginRequest): Promise<void> => {
     setLoading(true);
     setError(null);
@@ -21,6 +27,12 @@ const useLogin: () => UseLoginHook = () => {
     try {
       const result = await loginService(loginData);
       setUserData(result);
+
+      if(result.username) {
+        toast('Success')
+        navigate('/')
+        authStore.login()
+      }
     } catch (error) {
       setError((error as Error).message);
     } finally {

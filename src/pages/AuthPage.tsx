@@ -6,7 +6,6 @@ import Caraousel from "../components/Carousel";
 import { ChangeEvent, useState } from "react";
 import useLogin from "../hooks/auth/useLogin";
 import { toast } from "react-toastify";
-import useAuthStore from "../stores/authStore";
 
 interface AuthPageProps {
   type: String
@@ -30,8 +29,6 @@ const AuthPage: React.FC<AuthPageProps> = ({ type }) => {
 export default AuthPage
 
 export const LoginComponent = () => {
-  const navigate = useNavigate();
-  const authStore = useAuthStore()
   const { login, loading } = useLogin();
 
   const [loginId, setLoginId] = useState('')
@@ -43,11 +40,7 @@ export const LoginComponent = () => {
 
     try {
       await login({ loginId, password });
-      authStore.login();
-      navigate('/');
-      toast('success');
     } catch (error) {
-      // Handle error, show error message, etc.
       toast.error((error as Error).message);
     } finally {
       setButtonDisabled(false);
