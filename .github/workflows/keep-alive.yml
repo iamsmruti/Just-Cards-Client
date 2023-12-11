@@ -1,8 +1,8 @@
 name: Keep Alive
 
 on:
-  push:
-  - main  # Run every 20 minutes
+  schedule:
+    - cron: '*/15 * * * *'   # Run every 20 minutes
 
 jobs:
   ping-server:
