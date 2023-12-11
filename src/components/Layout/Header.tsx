@@ -58,7 +58,7 @@ const Header = () => {
             if (item.type === "link") {
               if (location.pathname === item.path) {
                 return (
-                  <Link to={item.path}>
+                  <Link to={item.path || ''}>
                     <p className="text-lg ml-3 border-b-[1px] border-reddish text-reddish">
                       {item.name}
                     </p>
@@ -66,7 +66,7 @@ const Header = () => {
                 );
               } else {
                 return (
-                  <Link to={item.path}>
+                  <Link to={item.path || ''}>
                     <p className="text-lg ml-3">{item.name}</p>
                   </Link>
                 );
@@ -76,7 +76,7 @@ const Header = () => {
             if(item.type === 'icon') {
               if(location.pathname === item.path) {
                 return (
-                  <Link to={item.path}>
+                  <Link to={item.path || ''}>
                     <div className="text-[24px] text-reddish ml-3">
                       {item.icon}
                     </div>
@@ -84,7 +84,7 @@ const Header = () => {
                 )
               } else {
                 return (
-                  <Link to={item.path}>
+                  <Link to={item.path || ''}>
                     <div className="text-[24px] ml-3">
                       {item.icon}
                     </div>
@@ -101,7 +101,7 @@ const Header = () => {
 
             if(item.type === 'image') {
               return (
-                <Link to={item.path}>
+                <Link to={item.path || ''}>
                   <div className="w-[60px] ml-2">
                     <img src={item.image} />
                   </div>
@@ -140,7 +140,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setSidebarOpen }) => {
         {menuItems.map((item) => {
           if(item.type === 'image') {
             return (
-              <Link to={item.path}>
+              <Link to={item.path || ''}>
                 <div className="w-[50%] ml-2 border-[1px] border-darkGray">
                   <img src={item.image} />
                 </div>
@@ -155,7 +155,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setSidebarOpen }) => {
           if(item.type === 'link') {
             if (location.pathname === item.path) {
               return (
-                <Link to={item.path}>
+                <Link to={item.path || ''}>
                   <p className="text-[48px] ml-6  border-b-[1px] border-reddish text-reddish">
                     {item.name}
                   </p>
@@ -163,7 +163,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setSidebarOpen }) => {
               );
             } else {
               return (
-                <Link to={item.path}>
+                <Link to={item.path || ''}>
                   <p className="text-[48px] ml-10">{item.name}</p>
                 </Link>
               );
@@ -177,7 +177,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setSidebarOpen }) => {
           if(item.type === 'icon') {
             if(location.pathname === item.path) {
               return (
-                <Link to={item.path}>
+                <Link to={item.path || ''}>
                   <div className="text-[40px] text-reddish ml-10">
                     {item.icon}
                   </div>
@@ -185,7 +185,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setSidebarOpen }) => {
               )
             } else {
               return (
-                <Link to={item.path}>
+                <Link to={item.path || ''}>
                   <div className="text-[40px] ml-10">
                     {item.icon}
                   </div>

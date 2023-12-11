@@ -32,7 +32,7 @@ export default AuthPage
 export const LoginComponent = () => {
   const navigate = useNavigate();
   const authStore = useAuthStore()
-  const { login, loading, error, userData } = useLogin();
+  const { login, loading } = useLogin();
 
   const [loginId, setLoginId] = useState('')
   const [password, setPassword] = useState('')
